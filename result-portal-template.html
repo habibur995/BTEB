@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Educational Board Result Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        .primary-green { color: #14A44D; }
+        .bg-primary-green { background-color: #14A44D; }
+        .hover-primary-green:hover { background-color: #0f8a3f; }
+        
+        @media print {
+            body { background-color: white !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Navigation Bar -->
+    <nav class="w-full max-w-5xl bg-white shadow-sm mb-6 rounded-lg border border-gray-200">
+        <div class="px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary-green rounded-full flex items-center justify-center text-white font-bold">
+                    📚
+                </div>
+                <span class="font-bold text-lg primary-green">Results Portal</span>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <button class="px-4 py-2 text-sm font-medium text-white bg-primary-green rounded-md hover:bg-green-700">
+                    Home
+                </button>
+                <button class="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-md">
+                    Help
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <header class="w-full max-w-5xl bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow-md p-6 mb-6 flex items-center gap-5">
+        <div class="flex-shrink-0 bg-white p-2 rounded-full shadow">
+            <div class="w-16 h-16 bg-primary-green rounded-full flex items-center justify-center text-white text-2xl">
+                🎓
+            </div>
+        </div>
+        <div>
+            <h1 class="text-2xl font-bold uppercase tracking-tight">Educational Result Portal</h1>
+            <h2 class="text-sm font-medium text-green-100 mt-1">JSC/SSC/HSC Examination Results</h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-5xl flex-grow">
+
+        <!-- Search Form Card -->
+        <div id="search-section" class="bg-white rounded-lg shadow-md border border-gray-200 mb-6">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800">Search for Results</h3>
+            </div>
+            
+            <form id="search-form" class="p-6 space-y-6">
+                
+                <!-- Exam Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                    <label class="md:text-right font-medium text-gray-700">Examination Type</label>
+                    <select id="exam" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">-- Select Examination --</option>
+                        <option value="jsc">JSC (Junior School Certificate)</option>
+                        <option value="ssc">SSC (Secondary School Certificate)</option>
+                        <option value="hsc">HSC (Higher Secondary Certificate)</option>
+                    </select>
+                </div>
+
+                <!-- Year Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                    <label class="md:text-right font-medium text-gray-700">Year</label>
+                    <select id="year" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">-- Select Year --</option>
+                    </select>
+                </div>
+
+                <!-- Board Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                    <label class="md:text-right font-medium text-gray-700">Board</label>
+                    <select id="board" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">-- Select Board --</option>
+                        <option value="dhaka">Dhaka</option>
+                        <option value="chittagong">Chittagong</option>
+                        <option value="rajshahi">Rajshahi</option>
+                        <option value="khulna">Khulna</option>
+                        <option value="barisal">Barisal</option>
+                    </select>
+                </div>
+
+                <!-- Result Type -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                    <label class="md:text-right font-medium text-red-600">Result Type</label>
+                    <select id="result-type" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">-- Select Type --</option>
+                        <option value="individual">Individual Result</option>
+                        <option value="merit">Merit List</option>
+                    </select>
+                </div>
+
+                <!-- Dynamic Fields (Roll Number) -->
+                <div id="dynamic-fields" class="hidden space-y-4 pt-4 border-t border-gray-200">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                        <label class="md:text-right font-medium text-gray-700">Roll Number</label>
+                        <input type="number" id="roll" placeholder="Enter Roll Number" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" required>
+                    </div>
+
+                    <!-- CAPTCHA -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="md:text-right">
+                            <label class="font-medium text-gray-700">Security Code</label>
+                        </div>
+                        <div class="md:col-span-2 flex gap-3">
+                            <div id="captcha-box" class="flex-1 px-3 py-2 bg-white border-2 border-dashed border-gray-400 font-bold text-lg tracking-widest text-gray-800 rounded flex items-center justify-center">
+                                ----
+                            </div>
+                            <button type="button" id="refresh-captcha" class="px-3 py-2 text-blue-600 hover:bg-gray-200 rounded transition-colors">
+                                🔄 Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center">
+                        <label></label>
+                        <input type="text" id="captcha-input" placeholder="Enter security code" maxlength="4" class="md:col-span-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" required>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-3 pt-4 border-t border-gray-200">
+                    <button type="submit" class="flex-1 md:flex-initial bg-primary-green hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors shadow-sm">
+                        Search Result
+                    </button>
+                    <button type="reset" class="flex-1 md:flex-initial bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Results Display Section -->
+        <div id="results-section" class="hidden space-y-6">
+            
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-0 overflow-hidden rounded-lg shadow-sm border border-gray-300 w-fit mx-auto">
+                <button id="search-again-btn" class="bg-primary-green hover:bg-green-700 text-white font-semibold px-6 py-2 transition-colors">
+                    Search Again
+                </button>
+                <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 transition-colors border-l border-white/30">
+                    Print Result
+                </button>
+            </div>
+
+            <!-- Student Info Card -->
+            <div class="bg-white rounded-lg shadow-md border border-gray-200">
+                <div class="bg-primary-green text-white px-6 py-3 font-bold rounded-t-lg">
+                    Student Information
+                </div>
+                <div class="p-6 overflow-x-auto">
+                    <table class="w-full text-sm text-gray-800">
+                        <tbody id="student-info-tbody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Results Table -->
+            <div class="bg-white rounded-lg shadow-md border border-gray-200">
+                <div class="bg-gray-50 px-6 py-3 border-b border-gray-200 font-bold text-gray-800">
+                    Subject-wise Results
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-primary-green text-white font-semibold">
+                            <tr>
+                                <th class="px-4 py-3 text-left">Code</th>
+                                <th class="px-4 py-3 text-left">Subject</th>
+                                <th class="px-4 py-3 text-right">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-tbody" class="divide-y divide-gray-200">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl bg-gray-200 rounded-lg p-4 mt-8 text-center text-xs text-gray-600">
+        <p><strong>Educational Board Coordination Committee</strong></p>
+        <p>&copy; 2024 All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Populate Years
+        const yearSelect = document.getElementById('year');
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= 2010; i--) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+
+        // Result Type Handler
+        const resultType = document.getElementById('result-type');
+        const dynamicFields = document.getElementById('dynamic-fields');
+        
+        resultType.addEventListener('change', (e) => {
+            if (e.target.value === 'individual') {
+                dynamicFields.classList.remove('hidden');
+            } else {
+                dynamicFields.classList.add('hidden');
+            }
+        });
+
+        // CAPTCHA Logic
+        let currentCaptcha = '';
+        const captchaBox = document.getElementById('captcha-box');
+        const refreshBtn = document.getElementById('refresh-captcha');
+        
+        function generateCaptcha() {
+            currentCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+            captchaBox.textContent = currentCaptcha;
+        }
+        
+        generateCaptcha();
+        refreshBtn.addEventListener('click', generateCaptcha);
+
+        // Sample Data
+        const sampleData = {
+            name: 'STUDENT NAME',
+            roll: '015518',
+            registration: '15102049',
+            board: 'Dhaka',
+            institute: 'Sample Institution',
+            gpa: '5.00',
+            subjects: [
+                { code: '101', name: 'BANGLA', grade: 'A+' },
+                { code: '107', name: 'ENGLISH', grade: 'A' },
+                { code: '109', name: 'MATHEMATICS', grade: 'A+' },
+                { code: '136', name: 'PHYSICS', grade: 'A' },
+                { code: '137', name: 'CHEMISTRY', grade: 'A+' },
+                { code: '138', name: 'BIOLOGY', grade: 'A' }
+            ]
+        };
+
+        // Form Handler
+        document.getElementById('search-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const captchaInput = document.getElementById('captcha-input').value;
+            if (captchaInput !== currentCaptcha) {
+                alert('Incorrect security code!');
+                generateCaptcha();
+                return;
+            }
+
+            // Populate Results
+            const studentInfoTbody = document.getElementById('student-info-tbody');
+            studentInfoTbody.innerHTML = `
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2 font-medium text-gray-600 bg-gray-50 w-1/4">Name</td>
+                    <td class="px-4 py-2 font-semibold">${sampleData.name}</td>
+                    <td class="px-4 py-2 font-medium text-gray-600 bg-gray-50 w-1/4">Roll</td>
+                    <td class="px-4 py-2 font-semibold">${sampleData.roll}</td>
+                </tr>
+                <tr class="border-b border-gray-200 bg-gray-50">
+                    <td class="px-4 py-2 font-medium text-gray-600">Board</td>
+                    <td class="px-4 py-2 font-semibold">${sampleData.board}</td>
+                    <td class="px-4 py-2 font-medium text-gray-600">GPA</td>
+                    <td class="px-4 py-2 font-semibold text-lg">${sampleData.gpa}</td>
+                </tr>
+            `;
+
+            const resultsTbody = document.getElementById('results-tbody');
+            resultsTbody.innerHTML = sampleData.subjects.map((subj, i) => `
+                <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-gray-100">
+                    <td class="px-4 py-3 font-medium">${subj.code}</td>
+                    <td class="px-4 py-3">${subj.name}</td>
+                    <td class="px-4 py-3 text-right font-bold text-lg">${subj.grade}</td>
+                </tr>
+            `).join('');
+
+            // Show Results
+            document.getElementById('search-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            generateCaptcha();
+        });
+
+        // Search Again
+        document.getElementById('search-again-btn').addEventListener('click', () => {
+            document.getElementById('search-section').classList.remove('hidden');
+            document.getElementById('results-section').classList.add('hidden');
+            document.getElementById('search-form').reset();
+            dynamicFields.classList.add('hidden');
+        });
+    </script>
+
+</body>
+</html>
