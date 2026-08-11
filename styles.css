@@ -1,0 +1,141 @@
+:root{
+  --bg:#f6f7f8;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --green:#15924f; /* tuned to match screenshot */
+  --danger:#d6302a; /* red used for 'Type of Result' */
+  --max-width:420px;
+  --radius:14px;
+  --field-gap:16px;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:var(--bg);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-text-size-adjust:100%;
+}
+
+/* Constrain to phone-like width and center */
+.page, .banner, .site-footer {
+  margin-left:auto;
+  margin-right:auto;
+  max-width:var(--max-width);
+}
+
+/* Banner */
+.banner{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  background:var(--green);
+  color:#fff;
+  padding:18px 16px;
+  border-radius:18px;
+  margin:16px 12px 14px;
+  box-shadow:0 2px 0 rgba(0,0,0,0.03) inset;
+}
+
+/* left column reserved for logo */
+.banner-left{flex:0 0 72px; display:flex; align-items:center; justify-content:center}
+.logo-wrap{
+  width:68px;
+  height:68px;
+  background:rgba(255,255,255,0.12);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px;
+}
+.logo{width:56px;height:56px;object-fit:cover;border-radius:50%;background:#fff;padding:4px}
+
+.banner-right{flex:1; padding-right:6px}
+.banner-right h1{
+  margin:0;
+  font-size:0.92rem;
+  line-height:1.02;
+  font-weight:700;
+  letter-spacing:0.2px;
+  text-transform:uppercase;
+}
+.banner-sub{
+  margin:8px 0 0;
+  font-size:0.67rem;
+  opacity:0.95;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:14px;
+  margin:14px 12px;
+  padding:14px;
+  border:1px solid #ececec;
+  box-shadow:0 8px 20px rgba(9,10,10,0.02);
+}
+
+/* lead instruction */
+.lead{
+  margin:0 0 var(--field-gap) 0;
+  color:var(--muted);
+  background:#f9fafb;
+  padding:12px;
+  border-radius:8px;
+  font-size:0.95rem;
+  border:1px solid #f0f2f3;
+}
+
+/* Form layout */
+.result-form{display:flex;flex-direction:column;gap:var(--field-gap)}
+.field{display:flex;flex-direction:column;gap:8px}
+.label-text{font-weight:600;font-size:0.95rem;color:#111827}
+.label-error{color:var(--danger)}
+
+/* Select styling similar to screenshot: soft border, rounded, subtle inner shade */
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  width:100%;
+  padding:14px 14px;
+  border-radius:10px;
+  border:1px solid #dadde1;
+  background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1l6 6 6-6" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 12px center;
+  background-size:14px 9px;
+  font-size:0.98rem;
+  color:#111827;
+  box-shadow:0 1px 0 rgba(255,255,255,0.6) inset;
+  transition:box-shadow .12s, border-color .12s;
+}
+select:focus{
+  outline:none;
+  border-color:rgba(21,146,79,0.65);
+  box-shadow:0 0 0 4px rgba(21,146,79,0.06);
+}
+
+/* Footer */
+.site-footer{margin:20px 12px 30px}
+.footer-inner{
+  background:#ededee;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+  color:#111827;
+  font-size:0.85rem;
+}
+.powered{margin:0;font-size:0.9rem}
+.muted{color:var(--muted);margin-top:8px;font-size:0.78rem}
+
+/* Responsive tweaks */
+@media (min-width:480px){
+  .banner{padding:22px}
+  .card{padding:18px}
+  select{padding:16px 16px}
+}
