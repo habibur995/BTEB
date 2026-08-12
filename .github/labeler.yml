@@ -1,0 +1,19 @@
+# Labeler configuration for automatic PR labeling based on changed files
+
+# Frontend changes
+frontend:
+  - '**.html'
+  - '**.css'
+  - '**.js'
+
+# Documentation changes
+documentation:
+  - '**.md'
+  - 'docs/**'
+
+# Configuration changes
+config:
+  - '.github/**'
+  - '**.yml'
+  - '**.yaml'
+  - '**.json'
